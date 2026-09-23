@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CrossSafe: Towards Cross-Embodiment Latent Safety Filters</title>
+  <meta name="description" content="CrossSafe learns one morphology-aware Hamilton–Jacobi latent safety filter that transfers across bimanual robot embodiments.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="keywords" content="CrossSafe, cross-embodiment safety, latent safety filters, Hamilton-Jacobi reachability, HoloBrain-0, RoboTwin, robot safety">
+  <link rel="canonical" href="https://trustworthyautonomy.github.io/CrossSafe/">
+  <link rel="stylesheet" href="stylesheet.css">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Trustworthy Autonomy Lab">
+  <meta property="og:title" content="CrossSafe: Towards Cross-Embodiment Latent Safety Filters">
+  <meta property="og:description" content="A morphology-aware Hamilton–Jacobi safety filter that generalizes across robot embodiments.">
+  <meta property="og:url" content="https://trustworthyautonomy.github.io/CrossSafe/">
+  <meta property="og:image" content="https://trustworthyautonomy.github.io/CrossSafe/sources/social-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Title and authors of CrossSafe: Towards Cross-Embodiment Latent Safety Filters">
+  <meta property="article:published_time" content="2026-09-23">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CrossSafe: Towards Cross-Embodiment Latent Safety Filters">
+  <meta name="twitter:description" content="A morphology-aware Hamilton–Jacobi safety filter that generalizes across robot embodiments.">
+  <meta name="twitter:image" content="https://trustworthyautonomy.github.io/CrossSafe/sources/social-card.png">
+
+  <meta name="citation_title" content="CrossSafe: Towards Cross-Embodiment Latent Safety Filters">
+  <meta name="citation_author" content="Ihab Tabbara">
+  <meta name="citation_author" content="Yuxuan Yang">
+  <meta name="citation_author" content="Hussein Sibai">
+  <meta name="citation_publication_date" content="2026/09/23">
+  <meta name="citation_online_date" content="2026/09/23">
+  <meta name="citation_pdf_url" content="https://trustworthyautonomy.github.io/CrossSafe/sources/paper.pdf">
+  <meta name="citation_fulltext_html_url" content="https://trustworthyautonomy.github.io/CrossSafe/">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "headline": "CrossSafe: Towards Cross-Embodiment Latent Safety Filters",
+  "name": "CrossSafe: Towards Cross-Embodiment Latent Safety Filters",
+  "description": "CrossSafe learns one morphology-aware Hamilton–Jacobi latent safety filter that transfers across bimanual robot embodiments.",
+  "abstract": "Cross-embodiment learning has shown that a single model, such as a vision-language-action (VLA) model, can learn state representations and manipulation skills that can be applied across heterogeneous robots to accomplish various tasks. We hypothesize that the same holds for safety enforcement. The reasoning required to satisfy a safety constraint, such as detecting an obstacle, recognizing that it should be avoided, and selecting a safe abstract action, is largely shared across robots. What differs across embodiments is how the abstract safe action is realized: morphology, kinematics, and dynamics determine which actions are safe and feasible. Consequently, the same action can be safe for one robot and unsafe for another. This is especially important for generalist manipulation policies that operate in a common end-effector action space without explicitly capturing how safety depends on the robot’s morphology and kinematics. We propose embodiment-conditioned safety filtering, in which a Hamilton–Jacobi reachability-based value function and its corresponding safety-maximizing policy are shared across robots. Using a morphology-aware latent representation of the robot and its environment, we perform Hamilton–Jacobi reachability analysis directly in latent space so that the learned safety concepts can generalize across embodiments while remaining explicitly conditioned on each robot’s morphology and kinematics. We evaluate our approach across five bimanual robot embodiments and five manipulation tasks with whole-body collision-avoidance constraints. Our results show that a single policy, jointly trained across five manipulation tasks and four embodiments, exhibits zero-shot generalization to a held-out embodiment, reducing the nominal policy’s collision rate. They also show that training using more embodiments improves generalization.",
+  "author": [
+    {"@type": "Person", "name": "Ihab Tabbara"},
+    {"@type": "Person", "name": "Yuxuan Yang"},
+    {"@type": "Person", "name": "Hussein Sibai"}
+  ],
+  "datePublished": "2026-09-23",
+  "url": "https://trustworthyautonomy.github.io/CrossSafe/",
+  "mainEntityOfPage": "https://trustworthyautonomy.github.io/CrossSafe/",
+  "image": "https://trustworthyautonomy.github.io/CrossSafe/sources/social-card.png",
+  "keywords": [
+    "CrossSafe",
+    "cross-embodiment safety",
+    "latent safety filters",
+    "Hamilton-Jacobi reachability",
+    "HoloBrain-0",
+    "RoboTwin"
+  ]
+}
+  </script>
+</head>
+<body>
+  <main class="container">
+    <nav class="lab-nav" aria-label="Lab navigation">
+      <a href="https://trustworthyautonomy.github.io/">Trustworthy Autonomy Lab</a> / Research
+    </nav>
+
+    <header class="hero">
+      <h1>CrossSafe: Towards Cross-Embodiment Latent Safety Filters</h1>
+      <p class="authors">Ihab Tabbara<sup>*</sup>, Yuxuan Yang<sup>*</sup>, and Hussein Sibai</p>
+      <p class="affiliation">Department of Computer Science &amp; Engineering, Washington University in St. Louis</p>
+      <p class="equal"><sup>*</sup>Equal contribution</p>
+      <div class="actions">
+        <a class="button" href="sources/paper.pdf">PDF</a>
+        <span class="button secondary disabled" role="button" aria-disabled="true">arXiv coming soon</span>
+        <span class="button secondary disabled" role="button" aria-disabled="true">Code coming soon</span>
+      </div>
+    </header>
+
+    <section aria-labelledby="abstract-title">
+      <h2 id="abstract-title">Abstract</h2>
+      <p class="abstract">Cross-embodiment learning has shown that a single model, such as a vision-language-action (VLA) model, can learn state representations and manipulation skills that can be applied across heterogeneous robots to accomplish various tasks. We hypothesize that the same holds for safety enforcement. The reasoning required to satisfy a safety constraint, such as detecting an obstacle, recognizing that it should be avoided, and selecting a safe abstract action, is largely shared across robots. What differs across embodiments is how the abstract safe action is realized: morphology, kinematics, and dynamics determine which actions are safe and feasible. Consequently, the same action can be safe for one robot and unsafe for another. This is especially important for generalist manipulation policies that operate in a common end-effector action space without explicitly capturing how safety depends on the robot’s morphology and kinematics. We propose embodiment-conditioned safety filtering, in which a Hamilton–Jacobi reachability-based value function and its corresponding safety-maximizing policy are shared across robots. Using a morphology-aware latent representation of the robot and its environment, we perform Hamilton–Jacobi reachability analysis directly in latent space so that the learned safety concepts can generalize across embodiments while remaining explicitly conditioned on each robot’s morphology and kinematics. We evaluate our approach across five bimanual robot embodiments and five manipulation tasks with whole-body collision-avoidance constraints. Our results show that a single policy, jointly trained across five manipulation tasks and four embodiments, exhibits zero-shot generalization to a held-out embodiment, reducing the nominal policy’s collision rate. They also show that training using more embodiments improves generalization.</p>
+    </section>
+
+    <section aria-labelledby="takeaways-title">
+      <h2 id="takeaways-title">Takeaways</h2>
+      <div class="highlight-grid">
+        <article class="highlight-card">
+          <h3>Safety reasoning is shared; safe actions are not</h3>
+          <p>Detecting an obstacle and deciding to avoid it transfers across robots. The whole-body motion that stays collision-free depends on each robot’s morphology, kinematics, and degrees of freedom.</p>
+        </article>
+        <article class="highlight-card">
+          <h3>One HJ filter in a morphology-aware latent space</h3>
+          <p>CrossSafe freezes HoloBrain-0, adds safety-related per-link features, and uses geometry-aware manipulator–scene attention so a shared critic and safe policy can run on robots with different DoFs.</p>
+        </article>
+        <article class="highlight-card">
+          <h3>Zero-shot transfer to a held-out embodiment</h3>
+          <p>A filter trained on four of five RoboTwin 2.0 bimanual robots reduces the nominal planner’s collision rate on the fifth, including 6-DoF training to a 7-DoF Franka-Panda.</p>
+        </article>
+        <article class="highlight-card">
+          <h3>More training embodiments help generalization</h3>
+          <p>Generalist filters trained on four embodiments outperform single-embodiment specialists on out-of-distribution robots, with lower collision rate and contact force.</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="talk-title">
+      <h2 id="talk-title">Talk</h2>
+      <p class="method-lede">A walkthrough of the presentation, including the hypothesis, contributions, and closed-loop videos.</p>
+      <figure class="research-figure talk">
+        <video controls preload="metadata" playsinline src="sources/videos/talk.mp4">
+          Talk video for CrossSafe: Towards Cross-Embodiment Latent Safety Filters
+        </video>
+        <figcaption>
+          <strong>Presentation recording.</strong>
+          Morphology-aware cross-embodiment latent safety filters, covering the six-slide talk below.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section aria-labelledby="slides-title">
+      <h2 id="slides-title">Presentation slides</h2>
+      <p class="method-lede">Slides from <em>Morphology-Aware Cross-Embodiment Latent Safety Filters</em>.</p>
+      <div class="slide-grid">
+        <figure class="slide-card">
+          <img src="sources/slides/slide-01-title.webp" alt="Title slide: CrossSafe Towards Cross-Embodiment Latent Safety Filters" width="1920" height="1080" loading="lazy">
+          <figcaption>Slide 1 — Title</figcaption>
+        </figure>
+        <figure class="slide-card">
+          <img src="sources/slides/slide-02-motivation.webp" alt="Motivation slide: shared safety reasoning versus embodiment-specific actions" width="1920" height="1080" loading="lazy">
+          <figcaption>Slide 2 — Motivation</figcaption>
+        </figure>
+        <figure class="slide-card">
+          <img src="sources/slides/slide-03-contributions.webp" alt="Contributions slide: cross-embodiment HJ filter and RoboTwin 2.0 evaluation" width="1920" height="1080" loading="lazy">
+          <figcaption>Slide 3 — Contributions</figcaption>
+        </figure>
+        <figure class="slide-card">
+          <img src="sources/slides/slide-04-filter.webp" alt="Slide comparing unfiltered nominal motion with CrossSafe-filtered motion" width="1920" height="1080" loading="lazy">
+          <figcaption>Slide 4 — The filter keeps the system safe</figcaption>
+        </figure>
+        <figure class="slide-card">
+          <img src="sources/slides/slide-05-embodiments.webp" alt="Slide showing one learned filter on five bimanual embodiments" width="1920" height="1080" loading="lazy">
+          <figcaption>Slide 5 — One filter across embodiments</figcaption>
+        </figure>
+        <figure class="slide-card">
+          <img src="sources/slides/slide-06-unseen.webp" alt="Slide showing CrossSafe on an unseen 7-DoF Franka Panda" width="1920" height="1080" loading="lazy">
+          <figcaption>Slide 6 — Unseen 7-DoF embodiment</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section aria-labelledby="videos-title">
+      <h2 id="videos-title">Experiment videos</h2>
+      <p class="method-lede">Clips from the PowerPoint. The nominal controller is RoboTwin 2.0’s cuRobo planner, which does not see the added obstacle. CrossSafe switches to a learned safe joint-space action when the critic predicts that the nominal action is unsafe.</p>
+
+      <h3>Without vs. with CrossSafe</h3>
+      <div class="video-grid">
+        <figure class="video-card">
+          <video controls muted loop playsinline preload="metadata" poster="sources/videos/without-crosssafe.jpg" src="sources/videos/without-crosssafe.mp4"></video>
+          <figcaption>Without CrossSafe — the planner drives into the obstacle.</figcaption>
+        </figure>
+        <figure class="video-card">
+          <video controls muted loop playsinline preload="metadata" poster="sources/videos/with-crosssafe.jpg" src="sources/videos/with-crosssafe.mp4"></video>
+          <figcaption>With CrossSafe — the filtered action stays clear of the obstacle.</figcaption>
+        </figure>
+      </div>
+
+      <h3>One learned filter on five embodiments</h3>
+      <p class="method-lede">The same safety filter is used on Piper, Franka-Panda, ARX-X5, UR5-WSG, and Aloha-AgileX, including the embodiment held out of safety-filter training.</p>
+      <div class="video-grid cols-5">
+        <figure class="video-card">
+          <video controls muted loop playsinline preload="metadata" poster="sources/videos/ur5-wsg.jpg" src="sources/videos/ur5-wsg.mp4"></video>
+          <figcaption>UR5-WSG</figcaption>
+        </figure>
+        <figure class="video-card">
+          <video controls muted loop playsinline preload="metadata" poster="sources/videos/arx-x5.jpg" src="sources/videos/arx-x5.mp4"></video>
+          <figcaption>ARX-X5</figcaption>
+        </figure>
+        <figure class="video-card">
+          <video controls muted loop playsinline preload="metadata" poster="sources/videos/aloha-agilex.jpg" src="sources/videos/aloha-agilex.mp4"></video>
+          <figcaption>Aloha-AgileX</figcaption>
+        </figure>
+        <figure class="video-card">
+          <video controls muted loop playsinline preload="metadata" poster="sources/videos/piper.jpg" src="sources/videos/piper.mp4"></video>
+          <figcaption>Piper</figcaption>
+        </figure>
+        <figure class="video-card">
+          <video controls muted loop playsinline preload="metadata" poster="sources/videos/franka-panda.jpg" src="sources/videos/franka-panda.mp4"></video>
+          <figcaption>Franka-Panda (unseen)</figcaption>
+        </figure>
+      </div>
+
+      <h3>Held-out 7-DoF Franka-Panda</h3>
+      <p class="method-lede">The filter is trained only on 6-DoF-per-arm embodiments. At test time it outputs an extra joint displacement per arm for Franka-Panda.</p>
+      <div class="video-grid">
+        <figure class="video-card">
+          <video controls muted loop playsinline preload="metadata" poster="sources/videos/franka-without.jpg" src="sources/videos/franka-without.mp4"></video>
+          <figcaption>Unseen Franka-Panda without CrossSafe.</figcaption>
+        </figure>
+        <figure class="video-card">
+          <video controls muted loop playsinline preload="metadata" poster="sources/videos/franka-with.jpg" src="sources/videos/franka-with.mp4"></video>
+          <figcaption>Unseen Franka-Panda with CrossSafe.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section aria-labelledby="method-title">
+      <h2 id="method-title">Method</h2>
+      <p class="method-lede">
+        A frozen HoloBrain-0 encoder produces scene tokens and per-link robot tokens from multi-view RGB-D, camera parameters, joint state, and the robot URDF.
+        CrossSafe augments each link with safety-related features that HoloBrain-0 does not encode, including world-frame linear and angular velocities and normalized kinematic depth, then fuses those features into the link tokens.
+      </p>
+      <p class="method-lede">
+        Geometry-aware manipulator–scene attention lets each link token attend to scene patches with a bias from 3D distance and direction.
+        The shared Hamilton–Jacobi critic scores a candidate joint action; the shared safe actor outputs per-joint angle displacements scaled by each joint’s limits.
+        At 25&nbsp;Hz the filter executes the nominal action if <em>Q</em> ≥ 0 and the safe action otherwise.
+      </p>
+      <figure class="research-figure">
+        <img src="sources/fig1-architecture.webp" alt="CrossSafe architecture: frozen HoloBrain-0, safety-related per-link features, geometry-aware attention, and shared critic and actor heads" width="1383" height="657" loading="lazy">
+        <figcaption>
+          <strong>Figure 1 from the paper.</strong>
+          Frozen HoloBrain-0 produces scene and per-link tokens. Trainable fusion, geometry-aware attention, and HJ heads yield a safety value and feasible whole-body actions for robots with different degrees of freedom.
+        </figcaption>
+      </figure>
+      <figure class="research-figure">
+        <img src="sources/fig2-tasks.webp" alt="Five RoboTwin manipulation tasks and five bimanual embodiments used to evaluate CrossSafe" width="1383" height="281" loading="lazy">
+        <figcaption>
+          <strong>Figure 2 from the paper.</strong>
+          Tasks, left to right: Place Bread in Basket, Place Container on Plate, Stack Two Blocks, Place Burger &amp; Fries, and Stack Two Bowls.
+          Embodiments, left to right: Aloha-AgileX, ARX-X5, Franka-Panda, Piper, and UR5-WSG.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section aria-labelledby="results-title">
+      <h2 id="results-title">Results</h2>
+      <p class="method-lede">
+        Evaluation uses five leave-one-embodiment-out folds in RoboTwin 2.0.
+        In-distribution (InD) numbers average the four training embodiments; out-of-distribution (OOD) is the held-out fifth.
+        Metrics are collision rate (CR), success rate (SR), intervention rate (IR), and contact force.
+        CrossSafe lowers the unfiltered planner’s CR from 64.1% to 39.8% InD and 49.8% OOD.
+      </p>
+      <div class="table-wrap">
+        <table class="results-table">
+          <caption class="visually-hidden">Table I comparison of methods</caption>
+          <thead>
+            <tr>
+              <th class="left" rowspan="2">Method</th>
+              <th colspan="4">In-distribution embodiments</th>
+              <th colspan="4">Out-of-distribution embodiment</th>
+            </tr>
+            <tr>
+              <th>CR ↓</th><th>SR ↑</th><th>IR</th><th>Force ↓</th>
+              <th>CR ↓</th><th>SR ↑</th><th>IR</th><th>Force ↓</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="nominal">
+              <td class="left">Nominal</td>
+              <td>64.1</td><td>32.2</td><td>—</td><td>179.6</td>
+              <td>64.1</td><td>32.2</td><td>—</td><td>179.6</td>
+            </tr>
+            <tr>
+              <td class="left">X-VLA-Safe</td>
+              <td>50.4±0.7</td><td>17.0±4.1</td><td>5.2±0.8</td><td>189.7±30.3</td>
+              <td>53.8±17.4</td><td>16.7±12.1</td><td>4.8±1.5</td><td>247.0±144.6</td>
+            </tr>
+            <tr>
+              <td class="left">CrossSafe w/o Geo, Aug</td>
+              <td>38.3±7.7</td><td>31.3±4.1</td><td>11.1±7.0</td><td>81.3±18.0</td>
+              <td>51.5±18.6</td><td>35.0±15.7</td><td>7.6±4.3</td><td>126.2±94.8</td>
+            </tr>
+            <tr>
+              <td class="left">CrossSafe w/o Geo</td>
+              <td>45.4±7.4</td><td>23.8±5.9</td><td>20.2±4.6</td><td>60.2±17.4</td>
+              <td>53.4±17.7</td><td>30.0±11.5</td><td>15.5±10.4</td><td>79.0±53.7</td>
+            </tr>
+            <tr>
+              <td class="left">CrossSafe w/o Aug</td>
+              <td>37.1±5.0</td><td>26.0±7.5</td><td>7.7±1.8</td><td>150.1±35.8</td>
+              <td>49.7±13.3</td><td>23.3±13.1</td><td>9.2±8.8</td><td>133.5±31.8</td>
+            </tr>
+            <tr class="ours">
+              <td class="left">CrossSafe</td>
+              <td>39.8±3.8</td><td>23.7±2.8</td><td>13.2±1.2</td><td>113.6±41.9</td>
+              <td>49.8±8.3</td><td>29.4±15.7</td><td>9.2±6.1</td><td>102.9±44.3</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">
+        <strong>Table I.</strong>
+        Mean ± std over five leave-one-embodiment-out models.
+        CR and SR are percentages; Force is newtons.
+        Shaded row is CrossSafe.
+      </p>
+
+      <div class="table-wrap">
+        <table class="results-table">
+          <caption class="visually-hidden">Table II specialists versus generalists</caption>
+          <thead>
+            <tr>
+              <th class="left">Setting</th>
+              <th class="left">Model</th>
+              <th>CR ↓</th><th>SR ↑</th><th>IR</th><th>Force ↓</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="left" rowspan="2">InD embodiment(s)</td>
+              <td class="left">Specialist</td>
+              <td>37.6±21.3</td><td>18.7±10.2</td><td>11.2±4.8</td><td>113.0±87.1</td>
+            </tr>
+            <tr class="ours">
+              <td class="left">Generalist</td>
+              <td>39.8±3.8</td><td>23.7±2.8</td><td>13.2±1.2</td><td>113.6±41.9</td>
+            </tr>
+            <tr>
+              <td class="left" rowspan="2">OOD embodiment(s)</td>
+              <td class="left">Specialist</td>
+              <td>54.4±8.2</td><td>27.0±5.5</td><td>5.6±3.4</td><td>144.8±24.5</td>
+            </tr>
+            <tr class="ours">
+              <td class="left">Generalist</td>
+              <td>49.8±8.3</td><td>29.4±15.7</td><td>9.2±6.1</td><td>102.9±44.3</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">
+        <strong>Table II.</strong>
+        CrossSafe specialists (one training embodiment) versus generalists (four training embodiments).
+        Generalists improve every OOD outcome metric.
+      </p>
+    </section>
+
+    <section aria-labelledby="citation-title">
+      <h2 id="citation-title">Citation</h2>
+      <pre class="citation"><code>@misc{tabbara2026crosssafe,
+  title={CrossSafe: Towards Cross-Embodiment Latent Safety Filters},
+  author={Ihab Tabbara and Yuxuan Yang and Hussein Sibai},
+  year={2026},
+  note={arXiv preprint forthcoming},
+}</code></pre>
+    </section>
+
+    <footer class="footer">
+      Part of the <a href="https://trustworthyautonomy.github.io/">Trustworthy Autonomy Lab research collection</a>
+      at Washington University in St. Louis.
+    </footer>
+  </main>
+</body>
+</html>
