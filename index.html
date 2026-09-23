@@ -105,51 +105,6 @@
       </div>
     </section>
 
-    <section aria-labelledby="talk-title">
-      <h2 id="talk-title">Talk</h2>
-      <p class="method-lede">A walkthrough of the presentation, including the hypothesis, contributions, and closed-loop videos.</p>
-      <figure class="research-figure talk">
-        <video controls preload="metadata" playsinline src="sources/videos/talk.mp4">
-          Talk video for CrossSafe: Towards Cross-Embodiment Latent Safety Filters
-        </video>
-        <figcaption>
-          <strong>Presentation recording.</strong>
-          Morphology-aware cross-embodiment latent safety filters, covering the six-slide talk below.
-        </figcaption>
-      </figure>
-    </section>
-
-    <section aria-labelledby="slides-title">
-      <h2 id="slides-title">Presentation slides</h2>
-      <p class="method-lede">Slides from <em>Morphology-Aware Cross-Embodiment Latent Safety Filters</em>.</p>
-      <div class="slide-grid">
-        <figure class="slide-card">
-          <img src="sources/slides/slide-01-title.webp" alt="Title slide: CrossSafe Towards Cross-Embodiment Latent Safety Filters" width="1920" height="1080" loading="lazy">
-          <figcaption>Slide 1 — Title</figcaption>
-        </figure>
-        <figure class="slide-card">
-          <img src="sources/slides/slide-02-motivation.webp" alt="Motivation slide: shared safety reasoning versus embodiment-specific actions" width="1920" height="1080" loading="lazy">
-          <figcaption>Slide 2 — Motivation</figcaption>
-        </figure>
-        <figure class="slide-card">
-          <img src="sources/slides/slide-03-contributions.webp" alt="Contributions slide: cross-embodiment HJ filter and RoboTwin 2.0 evaluation" width="1920" height="1080" loading="lazy">
-          <figcaption>Slide 3 — Contributions</figcaption>
-        </figure>
-        <figure class="slide-card">
-          <img src="sources/slides/slide-04-filter.webp" alt="Slide comparing unfiltered nominal motion with CrossSafe-filtered motion" width="1920" height="1080" loading="lazy">
-          <figcaption>Slide 4 — The filter keeps the system safe</figcaption>
-        </figure>
-        <figure class="slide-card">
-          <img src="sources/slides/slide-05-embodiments.webp" alt="Slide showing one learned filter on five bimanual embodiments" width="1920" height="1080" loading="lazy">
-          <figcaption>Slide 5 — One filter across embodiments</figcaption>
-        </figure>
-        <figure class="slide-card">
-          <img src="sources/slides/slide-06-unseen.webp" alt="Slide showing CrossSafe on an unseen 7-DoF Franka Panda" width="1920" height="1080" loading="lazy">
-          <figcaption>Slide 6 — Unseen 7-DoF embodiment</figcaption>
-        </figure>
-      </div>
-    </section>
-
     <section aria-labelledby="videos-title">
       <h2 id="videos-title">Experiment videos</h2>
       <p class="method-lede">Clips from the PowerPoint. The nominal controller is RoboTwin 2.0’s cuRobo planner, which does not see the added obstacle. CrossSafe switches to a learned safe joint-space action when the critic predicts that the nominal action is unsafe.</p>
