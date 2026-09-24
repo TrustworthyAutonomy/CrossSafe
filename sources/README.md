@@ -1,3 +1,3 @@
 # Assets
 
-Social card, figures, and experiment videos.
+Social card, architecture figure, and experiment videos.
